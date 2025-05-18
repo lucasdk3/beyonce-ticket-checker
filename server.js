@@ -4,7 +4,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const puppeteerExtra = require('puppeteer-extra');
 
 const app = express();
-const port = 9090;
+const port = 8080;
 
 // Configura o Puppeteer com Stealth
 puppeteerExtra.use(StealthPlugin());

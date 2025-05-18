@@ -5,10 +5,9 @@ RUN apt-get update && apt-get install -y \
     wget \
     ca-certificates \
     fonts-liberation \
-    libappindicator3-1 \
     libasound2 \
-    libatk-bridge2.0-0 \
     libatk1.0-0 \
+    libatk-bridge2.0-0 \
     libcups2 \
     libdbus-1-3 \
     libgdk-pixbuf2.0-0 \
@@ -18,13 +17,16 @@ RUN apt-get update && apt-get install -y \
     libxcomposite1 \
     libxdamage1 \
     libxrandr2 \
-    xdg-utils \
     libgbm1 \
-    libxshmfence1 \
-    libglu1-mesa \
-    --no-install-recommends \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    libxkbcommon0 \
+    libpango-1.0-0 \
+    libcairo2 \
+    xdg-utils \
+    xvfb \
+    xauth \
+    --no-install-recommends && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /app
 
@@ -38,3 +40,5 @@ RUN npm install -g npm && \
     npm install
 
 ENV PATH /app/node_modules/.bin:$PATH
+
+CMD xvfb-run --auto-servernum --server-args='-screen 0 1024x768x24' npm start
