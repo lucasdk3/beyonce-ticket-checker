@@ -26,17 +26,15 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+RUN mkdir /app
+
+COPY . /app
+
 # Cria diretório de trabalho
 WORKDIR /app
 
 # Copia arquivos e instala dependências
-COPY package*.json ./
-RUN npm install
+RUN npm install -g npm && \
+    npm install
 
-COPY . .
-
-# Expõe a porta
-EXPOSE 8080
-
-# Comando padrão
-CMD ["node", "server.js"]
+ENV PATH /app/node_modules/.bin:$PATH
